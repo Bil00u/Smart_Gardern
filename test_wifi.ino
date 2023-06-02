@@ -1,5 +1,5 @@
 #include <WiFi.h>
- 
+ // my wifi credentials 
 const char* ssid     = "Bilou";
 const char* password = "balaboula";
  
@@ -12,7 +12,7 @@ void setup()
  
     delay(10);
  
-    // We start by connecting to a WiFi network
+    // connecting to a WiFi network
  
     Serial.println();
     Serial.println();
@@ -40,19 +40,19 @@ int value = 0;
 void loop(){
  WiFiClient client = server.available();   // listen for incoming clients
  
-  if (client) {                             // if you get a client,
+  if (client) {                             // if there is a client,
     Serial.println("New Client.");           // print a message out the serial port
-    String currentLine = "";                // make a String to hold incoming data from the client
+    String currentLine = "";                // making a String to hold incoming data from the client
     while (client.connected()) {            // loop while the client's connected
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
         Serial.write(c);                    // print it out the serial monitor
         if (c == '\n') {                    // if the byte is a newline character
  
-          // if the current line is blank, you got two newline characters in a row.
+          // if the current line is blank, you have two newline characters in a row.
           // that's the end of the client HTTP request, so send a response:
           if (currentLine.length() == 0) {
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
+            // HTTP headers always start with a response code
             // and a content-type so the client knows what's coming, then a blank line:
             client.println("HTTP/1.1 200 OK");
             client.println("Content-type:text/html");
